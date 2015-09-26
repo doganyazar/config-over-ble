@@ -1,0 +1,88 @@
+<template name="device">
+    <h1>Device {{id}}</h1>
+
+    <button type="button" id="cancelButton" class="btn btn-lg btn-danger">Cancel</button>
+
+    {{#if isConnected}}
+        {{#with configService}}
+            {{> service}}
+        {{/with}}
+    {{else}}
+    <div class="alert alert-info" role="alert">
+          <strong>{{state}}</strong>
+    </div>
+    {{/if}}
+
+</template>
+
+<template name="service">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+        <h3 class="panel-title">{{name}}</h3>
+        </div>
+        <div class="panel-body">
+        {{#each charsArray}}
+            {{> char}}
+        {{/each}}
+        </div>
+    </div>
+
+</template>
+
+<template name="char">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{name}}</h3>
+            </div>
+            <div class="panel-body">
+                {{#if isReadable}}
+                <div class="col-lg-6">
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" id="Read" type="button">Read</button>
+                    </span>
+                      <input type="text" class="form-control" value="{{value}}" disabled>
+                    {{#if isLink value}}
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" id="OpenLink" type="button" value={{value}}>Go</button>
+                    </span>
+                    {{/if}}
+                  </div>
+                </div>
+                {{/if}}
+
+                {{#if isWritable}}
+                <div class="col-lg-6">
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" id="Write" type="button">Write</button>
+                    </span>
+                    <input type="text" id="WriteInput" class="form-control" placeholder="New Value" value="{{newValue}}">
+                  </div>
+                </div>
+                {{/if}}
+
+                {{#if isWifiChar}}
+                <button type="button" id="scanButton" class="btn btn-lg btn-danger">Scan</button>
+
+                <form class='wifi-test'>
+                    <label for="accessPointsSelect">Access Points</label>
+                    <select id="accessPointsSelect" class="form-control">
+                        <option>Wifi</option>
+                        {{#each accessPoints}}
+                            <option>{{SSID}}</option>
+                        {{/each}}
+                    </select>
+                    <label for="passphraseInput">Passphrase</label>
+                    <input type="password" id="passphraseInput" class="form-control" placeholder="Passphrase">
+                    <button type="submit" class="btn btn-primary">Test</button>
+                </form>
+                {{/if}}
+
+            </div>
+          </div>
+        </div>
+    </div>
+</template>

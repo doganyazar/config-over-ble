@@ -1,0 +1,38 @@
+<template name="devices">
+    <div id="ListPage">
+
+
+    <div class="panel panel-primary features">
+        <div class="panel-heading">Scypho Devices</div>
+        <div class="panel-body">
+        <button type="button" id="refreshButton" class="btn btn-lg btn-primary" disabled={{bleScanButtonDisabled}}>Refresh</button>
+        </div>
+        <table class="table text-center">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>RSSI</th>
+                <th>Configure</th>
+              </tr>
+            </thead>
+            <tbody>
+            {{#each devices}}
+              {{> listdevice}}
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</template>
+
+<template name="listdevice">
+    <tr>
+      <td>{{id}}</td>
+      <td>{{name}}</td>
+      <td>{{rssi}}</td>
+      <td>
+          <a href="#" id="connectButton"><i class="glyphicon glyphicon-cog"></i></a>
+      </td>
+    </tr>
+</template>
