@@ -259,7 +259,8 @@ Template.char.events({
         return false;
     },
     'click #OpenLink': function(evt){
-        window.open(evt.target.value, '_blank', 'location=yes');
+        // window.open(evt.target.value, '_blank', 'location=yes');
+        window.open(evt.target.value, '_system', 'location=yes');
         return false;
     },
 
